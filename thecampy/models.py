@@ -1,4 +1,5 @@
 import requests
+from thecampy import exceptions
 
 class Cookie:
     def __init__(self, r):
@@ -67,6 +68,13 @@ class Soldier:
             '육군훈련소(30연대)' : '20020192400',
         }
 
+        if not identity_codes[identity]:
+            raise thecampyValueError('정확한 신분이 아닙니다.')
+        
+        if not unit_codes[unit]:
+            raise thecampyValueError('해당 사단/육군훈련소 연대가 존재하지 않습니다.')
+
+        
         self.name = name
         self.bday = bday
         self.enlist_date = enlist_date

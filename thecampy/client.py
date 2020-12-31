@@ -133,7 +133,7 @@ class Client:
         )
 
         if r.status_code == 200 and r.json()["resultCd"] != '0000':
-            raise exceptions.ThecampyException("알 수 없는 오류")
+            raise exceptions.ThecampyException("알 수 없는 오류: resultCd={}".format r.json()["resultCd"])
         
         if (not r.json()):
             raise exceptions.ThecampyReqError('응답값이 없습니다.')
