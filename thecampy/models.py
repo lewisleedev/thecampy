@@ -77,6 +77,9 @@ class Soldier:
         self.unit_code = unit_codes[unit]
         self.relationship = relationship
     
+    def add_soldier_code(self, code)
+        self.soldier_code = code
+    
 class Message:
     def __init__(self, title, content):
 

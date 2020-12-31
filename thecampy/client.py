@@ -1,10 +1,10 @@
 import requests
-import util, models, exceptions
+from thecampy import utils, models, exceptions
 
 class Client:
     def enforce_login(self):
         if not hasattr(self, 'cookie'):
-            raise ValueError("You have to log in first to call this function.")
+            raise ValueError("로그인이 필요합니다.")
 
     def login(self, id, password):
 
@@ -16,7 +16,7 @@ class Client:
         }
 
         r = requests.post(
-            url= util.request_url('login/loginA.do'),
+            url= utils.request_url('login/loginA.do'),
             json = True,
             data = form,
             headers = {
@@ -28,8 +28,9 @@ class Client:
             raise exceptions.ThecampyReqError('HTTP 에러: {}'.format(r.status_code))
 
         self.cookie = models.Cookie(r)
+
         if (self.cookie.iuid == False or self.cookie.token == False):
-            raise 
+            raise exceptions.ThecampyException('알 수 없는 에러 {}'.format(r.json()))
         else:
             print('Successfully logged in.')
 
@@ -51,7 +52,7 @@ class Client:
         }
 
         r = requests.post(
-            url = util.request_url('missSoldier/insertDirectMissSoldierA.do'),
+            url = utils.request_url('missSoldier/insertDirectMissSoldierA.do'),
             json = True,
             headers = {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -79,7 +80,7 @@ class Client:
         }
         
         r = requests.post(
-            url = util.request_url('main/cafeCreateCheckA.do'),
+            url = utils.request_url('main/cafeCreateCheckA.do'),
             json = True,
             headers = {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -102,14 +103,19 @@ class Client:
 
         self.soldier_code = r.json()['listResult'][0]['traineeMgrSeq']
         
+        soldier.add_soldier_code(self.soldier_code)
+
         return self.soldier_code
     
-    def send_message(self, message):
+    def send_message(self, soldier, message):
         if soldier.identity != '예비군인/훈련병':
-            raise ValueError('예비군인/훈련병에게만 편지를 보낼 수 있습니다.')
+            raise exceptions.ThecampyValueError('예비군인/훈련병에게만 편지를 보낼 수 있습니다.')
         
+        if not soldier.soldier_code:
+            raise exceptions.ThecampyValueError('훈련병 식별코드를 받지 못하였습니다.')
+
         form = {
-            'traineeMgrSeq' : self.soldier_code,
+            'traineeMgrSeq' : soldier.soldier_code,
             'sympathyLetterContent': message.content,
             'sympathyLetterSubject': message.title,
             'boardDiv': 'sympathyLetter',
@@ -117,7 +123,7 @@ class Client:
         }
 
         r = requests.post(
-            url = util.request_url('consolLetter/insertConsolLetterA.do?'),
+            url = utils.request_url('consolLetter/insertConsolLetterA.do?'),
             json = True,
             headers = {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -133,4 +139,3 @@ class Client:
             raise exceptions.ThecampyReqError('응답값이 없습니다.')
 
         return True
-
