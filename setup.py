@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="thecampy", # Replace with your own username
-    version="0.1.6",
+    version="1.0.1",
     author="lewisleedev",
     author_email="lewislee@lewislee.net",
     description="더 캠프 인터넷편지 비공식 라이브러리",
