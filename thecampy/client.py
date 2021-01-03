@@ -43,9 +43,9 @@ class Client:
         self.enforce_login()
         form = {
             "missSoldierClassCdNm": soldier.identity, #성분 반환 (예비군인/훈련병)
-            "grpCdNm": '육군', #육군
+            "grpCdNm": '육군',
             "missSoldierClassCd": soldier.identity_code,
-            "grpCd": '0000010001',
+            "grpCd": '0000010001',#육군
             "name": soldier.name,
             "birth" : soldier.bday,
             "enterDate" : soldier.enlist_date,

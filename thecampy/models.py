@@ -20,14 +20,7 @@ class Cookie:
         return self.token
 
 class Soldier:
-    def __init__(self, name, bday, enlist_date, identity, unit, relationship):
-        identity_codes = {
-            '예비군인/훈련병' : '0000490001',
-            '병사' : '0000490002',
-            '장교' : '0000490003',
-            '부사관' : '0000490004',
-            '군무원' : '0000490005',
-        }
+    def __init__(self, name, bday, enlist_date, identity, unit):
 
         unit_codes = {
             '1사단' : '20121290100',
@@ -67,10 +60,8 @@ class Soldier:
             '육군훈련소(29연대)' : '20020192300',
             '육군훈련소(30연대)' : '20020192400',
         }
+    
 
-        if not identity_codes[identity]:
-            raise thecampyValueError('정확한 신분이 아닙니다.')
-        
         if not unit_codes[unit]:
             raise thecampyValueError('해당 사단/육군훈련소 연대가 존재하지 않습니다.')
 
@@ -78,18 +69,17 @@ class Soldier:
         self.name = name
         self.bday = bday
         self.enlist_date = enlist_date
-        self.identity = identity
+        self.identity = '0000490001'
         self.identity_code = identity_codes[identity]
-        self.army = '0000010001' #ROKA code
+        self.army = '0000010001' #육군 코드
         self.unit = unit
         self.unit_code = unit_codes[unit]
-        self.relationship = relationship
+        
     
     def add_soldier_code(self, code):
         self.soldier_code = code
     
 class Message:
     def __init__(self, title, content):
-
         self.title = title
         self.content = content
