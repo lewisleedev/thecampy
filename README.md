@@ -24,13 +24,13 @@ pip install thecampy
 
     soldier = thecampy.Soldier(
 
-    [이름],
+            [이름],
 
-    [생일(yyyymmdd)],
+            [생일(yyyymmdd)],
 
-    [입대일(yyyymmdd)],
+            [입대일(yyyymmdd)],
 
-    [부대(육군훈련소(30연대)],
+            [부대(육군훈련소(30연대)],
 
     )
 
