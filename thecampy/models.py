@@ -69,8 +69,8 @@ class Soldier:
         self.name = name
         self.bday = bday
         self.enlist_date = enlist_date
-        self.identity = '0000490001'
-        self.identity_code = identity_codes[identity]
+        self.identity = identity
+        self.identity_code = '0000490001'
         self.army = '0000010001' #육군 코드
         self.unit = unit
         self.unit_code = unit_codes[unit]

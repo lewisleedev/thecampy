@@ -39,7 +39,7 @@ class Client:
             'token' : self.cookie.token
         }
     
-    def add_solider(self, soldier):
+    def add_soldier(self, soldier):
         self.enforce_login()
         form = {
             "missSoldierClassCdNm": soldier.identity, #성분 반환 (예비군인/훈련병)
