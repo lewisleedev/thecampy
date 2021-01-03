@@ -20,7 +20,7 @@ class Cookie:
         return self.token
 
 class Soldier:
-    def __init__(self, name, bday, enlist_date, identity, unit):
+    def __init__(self, name, bday, enlist_date, unit):
 
         unit_codes = {
             '1사단' : '20121290100',
@@ -69,7 +69,7 @@ class Soldier:
         self.name = name
         self.bday = bday
         self.enlist_date = enlist_date
-        self.identity = identity
+        self.identity = "예비군인/훈련병"
         self.identity_code = '0000490001'
         self.army = '0000010001' #육군 코드
         self.unit = unit
