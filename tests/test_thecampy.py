@@ -1,4 +1,4 @@
-import thecampy, requests
+import requests
 
 def test_login():
     r = requests.post(
