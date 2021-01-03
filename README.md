@@ -20,31 +20,31 @@ pip install thecampy
 
   
 
-import thecampy
+    import thecampy
 
-soldier = thecampy.Soldier(
+    soldier = thecampy.Soldier(
 
-[이름],
+    [이름],
 
-[생일(yyyymmdd)],
+    [생일(yyyymmdd)],
 
-[입대일(yyyymmdd)],
+    [입대일(yyyymmdd)],
 
-[부대(육군훈련소(30연대)],
+    [부대(육군훈련소(30연대)],
 
-)
+    )
 
-msg = thecampy.Message([제목], [내용(1500자 이하)])
+    msg = thecampy.Message([제목], [내용(1500자 이하)])
 
-thecampy = thecampy.Client()
+    thecampy = thecampy.Client()
 
-thecampy.login(emain, pw) #Prints 'Successfully Logged in'
+    thecampy.login(emain, pw) #Prints 'Successfully Logged in'
 
-thecampy.add_soldier(soldier) #returns True
+    thecampy.add_soldier(soldier) #returns True
 
-thecampy.get_soldier(soldier) #returns soldier code
+    thecampy.get_soldier(soldier) #returns soldier code
 
-thecampy.send_message(soldier, msg) #returns True
+    thecampy.send_message(soldier, msg) #returns True
 
   
   
