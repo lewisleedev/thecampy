@@ -12,7 +12,7 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
   
 
-pip install thecampy
+  pip install thecampy
 
   
 
