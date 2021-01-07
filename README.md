@@ -11,11 +11,7 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
   
 
-<<<<<<< HEAD
     pip install thecampy
-=======
-  pip install thecampy
->>>>>>> 4b7fe6da51f7a834ba0a455569ba4fa651f85fe3
 
   
 
