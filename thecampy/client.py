@@ -1,7 +1,7 @@
 import requests
 from thecampy import utils, models, exceptions
 
-class Client:
+class client:
     def enforce_login(self):
         if not hasattr(self, 'cookie'):
             raise ValueError("로그인이 필요합니다.")
