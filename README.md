@@ -1,10 +1,9 @@
 # thecampy - 더 캠프 파이썬 라이브러리
 
-  
 
 thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참고하여 제작된 대국민 국군 소통 서비스 더 캠프의 파이썬 라이브러리입니다. 
 
- 간단한 파이썬 코드 몇줄로 인터넷 편지를 보낼 수 있도록 구현되었습니다. 매주 월요일 [더 캠프 request code를 테스트합니다.](https://github.com/lewisleedev/thecampy/actions)
+ 간단한 파이썬 코드 몇줄로 인터넷 편지를 보낼 수 있도록 구현되었습니다. 매일 [더 캠프 request code를 테스트합니다.](https://github.com/lewisleedev/thecampy/actions)
 
 첫 파이썬 라이브러리다보니 부족한 부분이 많습니다. 오류사항은 Issue 부탁드립니다.
 
@@ -12,7 +11,7 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
   
 
-pip install thecampy
+    pip install thecampy
 
   
 
@@ -22,7 +21,7 @@ pip install thecampy
 
     import thecampy
 
-    soldier = thecampy.Soldier(
+    my_soldier = thecampy.Soldier(
 
             [이름],
 
@@ -36,22 +35,20 @@ pip install thecampy
 
     msg = thecampy.Message([제목], [내용(1500자 이하)])
 
-    thecampy = thecampy.Client()
+    tc = thecampy.client()
 
-    thecampy.login(emain, pw) #Prints 'Successfully Logged in'
+    tc.login(email, pw) #Prints 'Successfully Logged in'
 
-    thecampy.add_soldier(soldier) #returns True
+    tc.add_soldier(my_soldier) #returns True
 
-    thecampy.get_soldier(soldier) #returns soldier code
+    tc.get_soldier(my_soldier) #returns soldier code
 
-    thecampy.send_message(soldier, msg) #returns True
+    tc.send_message(my_soldier, msg) #returns True
 
   
   
 
 ## 주의사항
-
-  
 
 - 더 캠프 계정은 이메일로 가입되어있어야 합니다. (카카오계정 지원 X)
 
