@@ -50,7 +50,7 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 # sample
     import thecampy
 
-    my_soldier = thecampy.Soldier('홍길동',20010101,20210225,'부대(육군훈련소(23연대'),)
+    my_soldier = thecampy.Soldier('홍길동',20010101,20210225,'육군훈련소(23연대)',)
 
     msg = thecampy.Message(['테스트 제목'], ['테스트 내용'])
 
