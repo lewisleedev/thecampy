@@ -31,8 +31,6 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
             [입대일(yyyymmdd)],
 
-            [부대(육군훈련소(30연대)],
-
     )
 
     msg = thecampy.Message([제목], [내용(1500자 이하)])
@@ -50,7 +48,7 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 # sample
     import thecampy
 
-    my_soldier = thecampy.Soldier('홍길동',20010101,20210225,'육군훈련소(23연대)',)
+    my_soldier = thecampy.Soldier('홍길동',20010101,20210225)
 
     msg = thecampy.Message(['테스트 제목'], ['테스트 내용'])
 
@@ -68,8 +66,6 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 ## 주의사항
 
 - 더 캠프 계정은 이메일로 가입되어있어야 합니다. (카카오계정 지원 X)
-
-- 부대이름을 정확히 입력해야합니다. ex) 육군훈련소(00연대), 7사단, 22사단...
 
 - 인터넷편지는 '예비군인/훈련병'에게만 보낼 수 있습니다.
 
