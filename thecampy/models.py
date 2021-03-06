@@ -60,12 +60,10 @@ class Soldier:
             '육군훈련소(29연대)' : '20020192300',
             '육군훈련소(30연대)' : '20020192400',
         }
-    
 
         if unit not in unit_codes:
-            raise thecampyValueError('해당 사단/육군훈련소 연대가 존재하지 않습니다.')
+            raise exceptions.ThecampyValueError('해당 사단/육군훈련소 연대가 존재하지 않습니다.')
 
-        
         self.name = name
         self.bday = bday
         self.enlist_date = enlist_date
