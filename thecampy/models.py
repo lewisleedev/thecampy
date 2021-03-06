@@ -20,7 +20,7 @@ class Cookie:
         return self.token
 
 class Soldier:
-    def __init__(self, name, bday, enlist_date, unit):
+    def __init__(self, name, bday, enlist_date, unit=None):
 
         unit_codes = {
             '1사단' : '20121290100',
@@ -61,8 +61,12 @@ class Soldier:
             '육군훈련소(30연대)' : '20020192400',
         }
 
-        if unit not in unit_codes:
-            raise exceptions.ThecampyValueError('해당 사단/육군훈련소 연대가 존재하지 않습니다.')
+        if unit is None:
+            unit_code = None
+        else:
+            if unit not in unit_codes:
+                raise exceptions.ThecampyValueError('해당 사단/육군훈련소 연대가 존재하지 않습니다.')
+            unit_code = unit_codes[unit]
 
         self.name = name
         self.bday = bday
@@ -71,8 +75,8 @@ class Soldier:
         self.identity_code = '0000490001'
         self.army = '0000010001' #육군 코드
         self.unit = unit
-        self.unit_code = unit_codes[unit]
-        
+        self.unit_code = unit_code
+
     
     def add_soldier_code(self, code):
         self.soldier_code = code
