@@ -12,7 +12,7 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 # Installation
 
   
-
+    pip install clients
     pip install thecampy
 
   
@@ -47,7 +47,22 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
     tc.send_message(my_soldier, msg) #returns True
 
-  
+# sample
+    import thecampy
+
+    my_soldier = thecampy.Soldier('홍길동',20010101,20210225,'육군훈련소(23연대)',)
+
+    msg = thecampy.Message(['테스트 제목'], ['테스트 내용'])
+
+    tc = thecampy.client()
+
+    tc.login('test@naver.com', 'test1234@password!') #Prints 'Successfully Logged in'
+
+    tc.add_soldier(my_soldier) #returns True
+
+    tc.get_soldier(my_soldier) #returns soldier code
+
+    tc.send_message(my_soldier, msg) #returns True
   
 
 ## 주의사항
