@@ -62,7 +62,7 @@ class Soldier:
         }
     
 
-        if not unit_codes[unit]:
+        if unit not in unit_codes:
             raise thecampyValueError('해당 사단/육군훈련소 연대가 존재하지 않습니다.')
 
         
