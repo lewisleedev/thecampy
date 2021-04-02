@@ -50,7 +50,7 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
     my_soldier = thecampy.Soldier('홍길동',20010101,20210225)
 
-    msg = thecampy.Message(['테스트 제목'], ['테스트 내용'])
+    msg = thecampy.Message([테스트 제목], [테스트 내용])
 
     tc = thecampy.client()
 
