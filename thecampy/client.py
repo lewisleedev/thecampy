@@ -76,7 +76,7 @@ class client:
         form = {
             "name" : soldier.name,
             "birth" : soldier.bday,
-            "enterDate" : soldier.enlist_date
+            "enterDate" : soldier.enlist_date,
         }
         
         r = requests.post(
@@ -94,12 +94,12 @@ class client:
         
         if not r.json():
             raise exceptions.ThecampyReqError('응답값이 없습니다.')
-
-        if len(r.json()['listResult']) == 0:
-             raise exceptions.ThecampyValueError("해당하는 훈련병을 찾을 수 없습니다.")
         
         if r.status_code == 200 and r.json()["resultCd"] != '9999':
             raise exceptions.ThecampyException("알 수 없는 오류")
+
+        if len(r.json()['listResult']) == 0:
+             raise exceptions.ThecampyValueError("해당하는 훈련병을 찾을 수 없습니다.")
 
         self.soldier_code = r.json()['listResult'][0]['traineeMgrSeq']
         
