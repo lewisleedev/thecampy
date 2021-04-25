@@ -7,10 +7,44 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
  파이썬으로 인터넷 편지를 보낼 수 있도록 구현되었습니다. 매 월요일 12시(UTC) [더 캠프 request code를 테스트합니다.](https://github.com/lewisleedev/thecampy/actions)
 
-첫 파이썬 라이브러리다보니 부족한 부분이 많습니다. 오류사항은 Issue 부탁드립니다. 
+첫 파이썬 라이브러리다보니 부족한 부분이 많습니다. 오류사항은 Issue 부탁드립니다.
 
-자세한 사용법은 [dev.lewislee.net/thecampy](https://dev.lewislee.net/thecampy)를 참고 바랍니다.
+# Installation
+
   
+    pip install thecampy
+
+  
+
+# Quickstart
+
+  
+
+    import thecampy
+
+    my_soldier = thecampy.Soldier(
+
+            [이름],
+
+            [생일(yyyymmdd)],
+
+            [입대일(yyyymmdd)],
+
+            [부대명(ex: 육군훈련소)]
+
+    )
+
+    msg = thecampy.Message([제목], [내용(1500자 이하)])
+
+    tc = thecampy.client()
+
+    tc.login(email, pw) #Prints 'Successfully Logged in'
+
+    tc.get_soldier(my_soldier) #returns soldier code
+
+    tc.send_message(my_soldier, msg) #returns True
+
+자세한 사항은 [프로젝트 홈페이지](https://dev.lewislee.net/thecampy)에서 확인할 수 있습니다.
 
 # LICENSE
 
