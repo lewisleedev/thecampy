@@ -7,72 +7,9 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
  파이썬으로 인터넷 편지를 보낼 수 있도록 구현되었습니다. 매 월요일 12시(UTC) [더 캠프 request code를 테스트합니다.](https://github.com/lewisleedev/thecampy/actions)
 
-첫 파이썬 라이브러리다보니 부족한 부분이 많습니다. 오류사항은 Issue 부탁드립니다.
+첫 파이썬 라이브러리다보니 부족한 부분이 많습니다. 오류사항은 Issue 부탁드립니다. 
 
-# Installation
-
-  
-    pip install clients
-    pip install thecampy
-
-  
-
-# Usage
-
-  
-
-    import thecampy
-
-    my_soldier = thecampy.Soldier(
-
-            [이름],
-
-            [생일(yyyymmdd)],
-
-            [입대일(yyyymmdd)],
-
-            [부대명(ex: 육군훈련소)]
-
-    )
-
-    msg = thecampy.Message([제목], [내용(1500자 이하)])
-
-    tc = thecampy.client()
-
-    tc.login(email, pw) #Prints 'Successfully Logged in'
-
-    tc.get_soldier(my_soldier) #returns soldier code
-
-    tc.send_message(my_soldier, msg) #returns True
-
-# sample
-    import thecampy
-
-    my_soldier = thecampy.Soldier('홍길동',20010101,20210225, '육군훈련소')
-
-    msg = thecampy.Message('제목', '내용')
-
-    tc = thecampy.client()
-
-    tc.login('test@naver.com', 'test1234@password!') #Prints 'Successfully Logged in'
-
-    tc.get_soldier(my_soldier) #returns soldier code
-
-    tc.send_message(my_soldier, msg) #returns True
-  
-
-## 주의사항
-
-- 더 캠프 계정은 이메일로 가입되어있어야 합니다. (카카오계정 지원 X)
-
-- 인터넷편지는 육군 '예비군인/훈련병'에게만 보낼 수 있습니다.
-
-  
-
-# Known Issues
-
-- 테스트 전송시도 약 7번중 한번꼴로 resultCd=9019 (제목에 금지 문자가 들어있습니다) 오류가 발생했습니다.
-
+자세한 사용법은 [dev.lewislee.net/thecampy](https://dev.lewislee.net/thecampy)를 참고 바랍니다.
   
 
 # LICENSE
