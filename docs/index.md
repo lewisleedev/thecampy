@@ -6,11 +6,11 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
 매 월요일 12시(UTC) [더 캠프 request code를 테스트합니다.](https://github.com/lewisleedev/thecampy/actions)
 
- ## Installation
+## Installation
 
     pip install thecampy
 
- ## Quick Start
+## Quick Start
 
     import thecampy
 
