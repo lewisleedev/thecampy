@@ -5,7 +5,7 @@
 
 thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참고하여 제작된 대국민 국군 소통 서비스 더 캠프의 파이썬 라이브러리입니다. 
 
- 간단한 파이썬 코드 몇줄로 인터넷 편지를 보낼 수 있도록 구현되었습니다. 매 월요일 12시(UTC) [더 캠프 request code를 테스트합니다.](https://github.com/lewisleedev/thecampy/actions)
+ 파이썬으로 인터넷 편지를 보낼 수 있도록 구현되었습니다. 매 월요일 12시(UTC) [더 캠프 request code를 테스트합니다.](https://github.com/lewisleedev/thecampy/actions)
 
 첫 파이썬 라이브러리다보니 부족한 부분이 많습니다. 오류사항은 Issue 부탁드립니다.
 
@@ -31,6 +31,8 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
             [입대일(yyyymmdd)],
 
+            [부대명(ex: 육군훈련소)]
+
     )
 
     msg = thecampy.Message([제목], [내용(1500자 이하)])
@@ -39,8 +41,6 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
     tc.login(email, pw) #Prints 'Successfully Logged in'
 
-    tc.add_soldier(my_soldier) #returns True
-
     tc.get_soldier(my_soldier) #returns soldier code
 
     tc.send_message(my_soldier, msg) #returns True
@@ -48,15 +48,13 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 # sample
     import thecampy
 
-    my_soldier = thecampy.Soldier('홍길동',20010101,20210225)
+    my_soldier = thecampy.Soldier('홍길동',20010101,20210225, '육군훈련소')
 
-    msg = thecampy.Message([테스트 제목], [테스트 내용])
+    msg = thecampy.Message('제목', '내용')
 
     tc = thecampy.client()
 
     tc.login('test@naver.com', 'test1234@password!') #Prints 'Successfully Logged in'
-
-    tc.add_soldier(my_soldier) #returns True
 
     tc.get_soldier(my_soldier) #returns soldier code
 
@@ -67,7 +65,7 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
 - 더 캠프 계정은 이메일로 가입되어있어야 합니다. (카카오계정 지원 X)
 
-- 인터넷편지는 '예비군인/훈련병'에게만 보낼 수 있습니다.
+- 인터넷편지는 육군 '예비군인/훈련병'에게만 보낼 수 있습니다.
 
   
 
