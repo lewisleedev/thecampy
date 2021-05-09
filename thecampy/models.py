@@ -1,5 +1,7 @@
-import requests
+from typing import NamedTuple
+
 from thecampy import exceptions
+
 
 class Cookie:
     def __init__(self, r):
@@ -15,9 +17,10 @@ class Cookie:
 
     def iuid(self):
         return self.iuid
-    
+
     def token(self):
         return self.token
+
 
 class Soldier:
     def __init__(self, name, bday, enlist_date, unit):
@@ -63,7 +66,7 @@ class Soldier:
 
         if unit not in unit_codes:
             raise exceptions.ThecampyValueError('해당 사단/육군훈련소 연대가 존재하지 않습니다.')
-        
+
         unit_code = unit_codes[unit]
 
         self.name = name
@@ -75,11 +78,18 @@ class Soldier:
         self.unit = unit
         self.unit_code = unit_code
 
-    
     def add_soldier_code(self, code):
         self.soldier_code = code
-    
+
+
 class Message:
     def __init__(self, title, content):
         self.title = title
         self.content = content
+
+
+class FileUploadResponse(NamedTuple):
+    file_group_mgr_seq: str
+    file_mgr_seq: str
+    letter_file_group_mgr_seq: str
+
