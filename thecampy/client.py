@@ -193,12 +193,6 @@ class client:
             raise exceptions.ThecampyReqError('이미지 업로드에 실패하였습니다.')
 
     def _upload_image(self, image: images.ThecampyImage) -> models.FileUploadResponse:
-        """
-        see https://www.thecamp.or.kr/consolLetter/viewConsolLetterInsert.do
-        :param image:
-        :return:
-        """
-
         self._upload_cdn(image)
 
         form = {
