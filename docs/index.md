@@ -28,13 +28,15 @@ thecampy는 pip으로 설치할 수 있습니다.
 
     msg = thecampy.Message([제목], [내용(1500자 이하)])
 
+    image = thecampy.ThecampyImage('sample.png')
+
     tc = thecampy.client()
 
     tc.login(email, pw) #Prints 'Successfully Logged in'
 
     tc.get_soldier(my_soldier) #returns soldier code
 
-    tc.send_message(my_soldier, msg) #returns True
+    tc.send_message(my_soldier, msg, image) #returns True
 
 ## Example
     import thecampy
@@ -42,6 +44,8 @@ thecampy는 pip으로 설치할 수 있습니다.
     my_soldier = thecampy.Soldier('홍길동',20010101,20210225, '육군훈련소')
 
     msg = thecampy.Message('제목', '내용')
+    
+    image = thecampy.ThecampyImage('sample.png')
 
     tc = thecampy.client()
 
@@ -49,12 +53,14 @@ thecampy는 pip으로 설치할 수 있습니다.
 
     tc.get_soldier(my_soldier)
 
-    tc.send_message(my_soldier, msg)
+    tc.send_message(my_soldier, msg, image)
 
 ## Before you use it
 
  - thecampy는 더캠프의 **이메일 계정**이 있어야합니다. 카카오계정은 지원하지 않습니다.
- - 더캠프의 인터넷편지는 육군 훈련병만 가능합니다.
+ - 더 캠프의 인터넷편지는 육군 훈련병만 가능합니다.
+ - 더 캠프의 인터넷 편지는 1500자 이하여야합니다.
+ - image는 선택사항입니다.
 
 ## 부대명과 부대코드
 
@@ -100,6 +106,9 @@ thecampy는 pip으로 설치할 수 있습니다.
         }
 
 ## Changes
+
+### v 2.1.0
+- 사진 첨부 기능 추가([#9](https://github.com/lewisleedev/thecampy/pull/9) by [2minchul](https://github.com/2minchul)
 
 ### v 2.0.0
 

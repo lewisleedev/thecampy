@@ -30,11 +30,13 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
             [입대일(yyyymmdd)],
 
-            [부대명(ex: 육군훈련소)]
+            [부대명(ex: 육군훈련소)],
 
     )
 
     msg = thecampy.Message([제목], [내용(1500자 이하)])
+
+    image = thecampy.ThecampyImage('sample.png')
 
     tc = thecampy.client()
 
@@ -42,7 +44,7 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
     tc.get_soldier(my_soldier) #returns soldier code
 
-    tc.send_message(my_soldier, msg) #returns True
+    tc.send_message(my_soldier, msg, image) #returns True
 
 자세한 사항은 [프로젝트 홈페이지](https://dev.lewislee.net/thecampy)에서 확인할 수 있습니다.
 
