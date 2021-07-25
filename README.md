@@ -12,10 +12,9 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
 ## Getting Started
 
-### Dependencies
+### Dependency
 
-* Praw
-* pytz (for Posted date timezone stuff)
+* requests
 
 ### Installing
 
