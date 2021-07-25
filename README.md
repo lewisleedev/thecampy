@@ -1,53 +1,75 @@
 ![PyPI](https://img.shields.io/pypi/v/thecampy?style=for-the-badge)![GitHub](https://img.shields.io/github/license/lewisleedev/thecampy?style=for-the-badge)![GitHub Workflow Status](https://img.shields.io/github/workflow/status/lewisleedev/thecampy/%EB%8D%94%EC%BA%A0%ED%94%84%20response%20%ED%99%95%EC%9D%B8?label=Response&style=for-the-badge)
 
-# thecampy - 더 캠프 파이썬 라이브러리
-
+# thecampy - 더캠프 파이썬 라이브러리
 
 thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참고하여 제작된 대국민 국군 소통 서비스 더 캠프의 파이썬 라이브러리입니다. 
 
- 파이썬으로 인터넷 편지를 보낼 수 있도록 구현되었습니다. 매 월요일 12시(UTC) [더 캠프 request code를 테스트합니다.](https://github.com/lewisleedev/thecampy/actions)
+파이썬으로 인터넷 편지를 보낼 수 있도록 구현되었습니다. 매 월요일 12시(UTC) [더 캠프 request code를 테스트합니다.](https://github.com/lewisleedev/thecampy/actions)
 
-첫 파이썬 라이브러리다보니 부족한 부분이 많습니다. 오류사항은 Issue 부탁드립니다.
+## Description
 
-# Installation
+thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참고하여 제작되어 더캠프 인터넷 편지를 간단하게 보낼 수 있도록 만들어진 파이썬 라이브러리입니다.
 
-  
-    pip install thecampy
+## Getting Started
 
-  
+### Dependencies
 
-# Quickstart
+* Praw
+* pytz (for Posted date timezone stuff)
 
-  
+### Installing
 
-    import thecampy
+* `pip install thecampy`
 
-    my_soldier = thecampy.Soldier(
+### Quickstart
 
-            [이름],
+```
+import thecampy
 
-            [생일(yyyymmdd)],
+my_soldier = thecampy.Soldier(
 
-            [입대일(yyyymmdd)],
+        '이름',
 
-            [부대명(ex: 육군훈련소)],
+        '생일(yyyymmdd)',
 
-    )
+        '입대일(yyyymmdd)',
 
-    msg = thecampy.Message([제목], [내용(1500자 이하)])
+        '부대명(ex: 육군훈련소)'
 
-    image = thecampy.ThecampyImage('sample.png')
+)
 
-    tc = thecampy.client()
+msg = thecampy.Message([제목], [내용(1500자 이하)])
 
-    tc.login(email, pw) #Prints 'Successfully Logged in'
+image = thecampy.ThecampyImage('sample.png')
 
-    tc.get_soldier(my_soldier) #returns soldier code
+tc = thecampy.client(email, pw)
 
-    tc.send_message(my_soldier, msg, image) #returns True
+tc.get_soldier(my_soldier) #returns soldier code
 
-자세한 사항은 [프로젝트 홈페이지](https://dev.lewislee.net/thecampy)에서 확인할 수 있습니다.
+tc.send_message(my_soldier, msg, image)
+```
 
-# LICENSE
+## Disclaimer
 
-This project is licensed under the MIT License.
+thecampy는 더캠프의 서비스업자와 관련이 없습니다. thecampy는 더캠프 서비스를 악용하는데에 사용할 수 없습니다. thecampy의 사용으로인한 책임은 전적으로 사용자에게 있습니다.
+
+## Contributors
+
+[lewisleedev](https://github.com/lewisleedev)
+
+[2minchul](https://github.com/2minchul)
+
+[OneTop4458](https://github.com/OneTop4458)
+
+[SyphonArch](https://github.com/SyphonArch)
+
+## Version History
+
+    * 3.0.0
+        * login method 삭제 및 __init__으로 이전
+        * docstring 추가
+        * and lot more fixes, chores and refactors
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details
