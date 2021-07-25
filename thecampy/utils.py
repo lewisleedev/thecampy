@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta, timezone
-
 seoul_timezone = timezone(timedelta(hours=9), 'Asia/Seoul')
 
 

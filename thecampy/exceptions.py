@@ -4,5 +4,5 @@ class ThecampyException(Exception):
 class ThecampyValueError(ThecampyException):
     pass
 
-class ThecampyReqError(ThecampyException): #Request오류들
+class ThecampyReqError(ThecampyException):
     pass
