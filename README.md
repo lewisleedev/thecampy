@@ -65,10 +65,10 @@ thecampy는 더캠프의 서비스업자와 관련이 없습니다. thecampy는 
 
 ## Version History
 
-* 3.0.0
-        * login method 삭제 및 __init__으로 이전
-        * docstring 추가
-        * and lot more fixes, chores and refactors
+- 3.0.0
+    - login method 삭제 및 __init__으로 이전
+    - docstring 추가
+    - and lot more fixes, chores and refactors
 
 ## License
 
