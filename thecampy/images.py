@@ -1,7 +1,7 @@
 import io
 from typing import BinaryIO, Union
 
-from thecampy import exceptions, image_utils, utils
+from . import exceptions, image_utils, utils
 
 
 class ThecampyImage:
