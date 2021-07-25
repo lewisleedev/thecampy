@@ -1,24 +1,29 @@
 from typing import Optional
-
 import requests
+from . import exceptions, images, models, utils
 
-from thecampy import exceptions, images, models, utils
-
-
-class client:
+class Client:
+    """Client class는 thecampy의 메인 class입니다. 
+    
+    Client 인스턴스를 사용해 The Camp의 인터넷 편지 서비스에 접근할 수 있습니다.
+    """
     upload_url_api_key = 'xIerQL8gDg4qKd5sbVjAr7rgzf2FtJ6C4OKgTv25'
     upload_api_key = 'b3JedGhtQo5RFOR2pBpN6amkfAMJTZUY7tosboGt'
 
-    def enforce_login(self):
-        if not hasattr(self, 'cookie'):
-            raise ValueError("로그인이 필요합니다.")
+    def __init__(self, email, password):
+        """Client 인스턴스를 시작합니다.
 
-    def login(self, id, password):
-
+        :param email: The Camp 웹사이트 계정의 email
+        :type email: str
+        :param password: The Camp 웹사이트 계정의 비밀번호
+        :type password: str
+        :return: 로그인 후 Cookie의 iuid와 token 값을 dictionary로 반환합니다.
+        :rtype: dict
+        """
         form = {
             "state": 'email-login',
             "autoLoginYn": 'N',
-            "userId": id,
+            "userId": email,
             "userPwd": password,
         }
 
@@ -38,16 +43,23 @@ class client:
 
         if (self.cookie.iuid == False or self.cookie.token == False):
             raise exceptions.ThecampyException('알 수 없는 에러 {}'.format(r.json()))
-        else:
-            print('Successfully logged in.')
-
+        
         return {
             'iuid' : self.cookie.iuid,
             'token' : self.cookie.token
         }
-    
+
+    def _enforce_login(self):
+        if not hasattr(self, 'cookie'):
+            raise exceptions.ThecampyValueError("로그인이 필요합니다.")
+
     def add_soldier(self, soldier):
-        self.enforce_login()
+        """The camp의 보고싶은 군인에 주어진 훈련병을 추가합니다.
+
+        :param soldier: 훈련병의 Soldier model
+        :type soldier: models.Soldier
+        """
+        self._enforce_login()
         form = {
             "missSoldierClassCdNm": soldier.identity, #성분 반환 (예비군인/훈련병)
             "grpCdNm": '육군',
@@ -76,10 +88,15 @@ class client:
         if (r.json()['resultCd'] not in ok_resultCd):
             raise exceptions.ThecampyException("알 수 없는 에러: resultCd: {}".format((r.json()['resultCd'])))
 
-        return True
-
     def get_soldier(self, soldier):
-        self.enforce_login()
+        """주어진 훈련병의 고유 id(code)를 class`models.Soldier`에 추가하고, code를 반환합니다.
+
+        :param soldier: 훈련병의 Soldier model
+        :type soldier: models.Soldier
+        :return: 훈련병의 고유 code
+        :rtype: str
+        """
+        self._enforce_login()
         form = {
             "name" : soldier.name,
             "birth" : soldier.bday,
@@ -118,10 +135,22 @@ class client:
 
     def send_message(self, soldier: models.Soldier, message: models.Message,
                      image: Optional[images.ThecampyImage] = None):
+        """주어진 Message를 주어진 Soldier에게 the camp 인터넷 편지로 발송합니다. Image가 주어졌다면, 사진도 함께 전송합니다.
+
+        :param soldier: 훈련병의 Soldier 모델
+        :type soldier: models.Soldier
+        :param message: 보내려는 편지의 Message 모델
+        :type message: models.Message
+        :param image: 보내려는 사진의 Image 모델, 기본값은 None.
+        :type image: Optional[images.ThecampyImage], optional
+        """
+        self._enforce_login()
         if soldier.identity != '예비군인/훈련병':
+            message.is_sent = False
             raise exceptions.ThecampyValueError('예비군인/훈련병에게만 편지를 보낼 수 있습니다.')
 
         if not soldier.soldier_code:
+            message.is_sent = False
             raise exceptions.ThecampyValueError('훈련병 식별코드를 받지 못하였습니다.')
 
         form = {
@@ -149,13 +178,17 @@ class client:
         )
 
         if r.status_code == 200 and r.json()["resultCd"] == '9019':
+            message.is_sent = False
             raise exceptions.ThecampyException("9019")
         elif r.json()["resultCd"] != '0000':
+            message.is_sent = False
             raise exceptions.ThecampyException("알 수 없는 오류: resultCd={}".format(r.json()["resultCd"]))
+        
         if (not r.json()):
+            message.is_sent = False
             raise exceptions.ThecampyReqError('응답값이 없습니다.')
 
-        return True
+        message.is_sent = True
 
     def _get_upload_url(self, image: images.ThecampyImage) -> str:
         r = requests.post(
@@ -194,7 +227,6 @@ class client:
 
     def _upload_image(self, image: images.ThecampyImage) -> models.FileUploadResponse:
         self._upload_cdn(image)
-
         form = {
             'boardDiv': 'sympathyLetter',
             'savedFileNm': image.saved_file_name,
@@ -206,6 +238,7 @@ class client:
             'imgHSize': str(image.metadata.height),
             'fileType': 'image',
         }
+
         r = requests.post(
             url=utils.request_url('commonFileUploadCdn.do'),
             headers={
