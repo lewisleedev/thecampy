@@ -1,5 +1,5 @@
 from . import image_utils, utils
-from .client import client
+from .client import Client
 from .exceptions import ThecampyException, ThecampyReqError, ThecampyValueError
 from .images import ThecampyImage
 from .models import Cookie, Message, Soldier
