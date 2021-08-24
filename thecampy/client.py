@@ -44,11 +44,6 @@ class Client:
         if (self.cookie.iuid == False or self.cookie.token == False):
             raise exceptions.ThecampyException('알 수 없는 에러 {}'.format(r.json()))
         
-        return {
-            'iuid' : self.cookie.iuid,
-            'token' : self.cookie.token
-        }
-
     def _enforce_login(self):
         if not hasattr(self, 'cookie'):
             raise exceptions.ThecampyValueError("로그인이 필요합니다.")
