@@ -64,6 +64,10 @@ thecampy는 더캠프의 서비스업자와 관련이 없습니다. thecampy는 
 
 ## Version History
 
+- 3.0.1
+    - 55사단(용인) 부대코드 추가 (이메일 제안)
+    - `__init__.py`와 `README.md`에서 Client가 소문자로 시작하던 오류 수정
+
 - 3.0.0
     - login method 삭제 및 __init__으로 이전
     - docstring 추가
