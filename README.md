@@ -41,7 +41,7 @@ msg = thecampy.Message([제목], [내용(1500자 이하)])
 
 image = thecampy.ThecampyImage('sample.png')
 
-tc = thecampy.client(email, pw)
+tc = thecampy.Client(email, pw)
 
 tc.get_soldier(my_soldier) #returns soldier code
 
