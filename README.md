@@ -62,6 +62,8 @@ thecampy는 더캠프의 서비스업자와 관련이 없습니다. thecampy는 
 
 [SyphonArch](https://github.com/SyphonArch)
 
+[leesangwon](https://github.com/leeesangwon)
+
 ## Version History
 
 - 3.0.1
