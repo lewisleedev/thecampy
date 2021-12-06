@@ -1,5 +1,7 @@
 ![PyPI](https://img.shields.io/pypi/v/thecampy?style=for-the-badge)![GitHub](https://img.shields.io/github/license/lewisleedev/thecampy?style=for-the-badge)![GitHub Workflow Status](https://img.shields.io/github/workflow/status/lewisleedev/thecampy/%EB%8D%94%EC%BA%A0%ED%94%84%20response%20%ED%99%95%EC%9D%B8?label=Response&style=for-the-badge)
 
+> :warning: Github Action의 Test가 실패하고있지만 정상작동중입니다.
+
 # thecampy - 더캠프 파이썬 라이브러리
 
 thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참고하여 제작된 대국민 국군 소통 서비스 더 캠프의 파이썬 라이브러리입니다. 
@@ -50,7 +52,7 @@ tc.send_message(my_soldier, msg, image)
 
 ## Disclaimer
 
-thecampy는 더캠프의 서비스업자와 관련이 없습니다. thecampy는 더캠프 서비스를 악용하는데에 사용할 수 없습니다. thecampy의 사용으로인한 책임은 전적으로 사용자에게 있습니다.
+thecampy는 더캠프의 서비스업자와 관련이 없습니다. thecampy는 더캠프 서비스를 악용하는데에 사용할 수 없습니다. **thecampy의 사용으로인한 책임은 전적으로 사용자에게 있습니다.**
 
 ## Contributors
 
@@ -65,6 +67,9 @@ thecampy는 더캠프의 서비스업자와 관련이 없습니다. thecampy는 
 [leesangwon](https://github.com/leeesangwon)
 
 ## Version History
+
+- 3.0.2
+    - - `__init__`함수가 None이 아닌 값을 가지던 버그 수정 #10 (by [leesangwon](https://github.com/leeesangwon))
 
 - 3.0.1
     - 55사단(용인) 부대코드 추가 (이메일 제안)
