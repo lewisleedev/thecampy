@@ -1,6 +1,6 @@
 ![PyPI](https://img.shields.io/pypi/v/thecampy?style=for-the-badge)![GitHub](https://img.shields.io/github/license/lewisleedev/thecampy?style=for-the-badge)![GitHub Workflow Status](https://img.shields.io/github/workflow/status/lewisleedev/thecampy/%EB%8D%94%EC%BA%A0%ED%94%84%20response%20%ED%99%95%EC%9D%B8?label=Response&style=for-the-badge)
 
-> :warning: Github Action의 Test가 실패하고있지만 정상작동중입니다.
+> :warning: 현재 더캠프 내부 시스템의 변화로 작동하지 않습니다. See issue #14.
 
 # thecampy - 더캠프 파이썬 라이브러리
 
