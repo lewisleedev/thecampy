@@ -1,6 +1,6 @@
 ![PyPI](https://img.shields.io/pypi/v/thecampy?style=for-the-badge)![GitHub](https://img.shields.io/github/license/lewisleedev/thecampy?style=for-the-badge)![GitHub Workflow Status](https://img.shields.io/github/workflow/status/lewisleedev/thecampy/%EB%8D%94%EC%BA%A0%ED%94%84%20response%20%ED%99%95%EC%9D%B8?label=Response&style=for-the-badge)
 
-> :warning: 현재 더캠프 내부 시스템의 변화로 작동하지 않습니다. See issue #14.
+> :warning: 현재 더캠프 내부 시스템의 변화로 기존 v3.0.2는 작동하지 않습니다. 4.0.0a 버젼은 beautifulsoup을 사용해 soldier_code를 받아옵니다. 카페 가입을 수동으로 해주어야합니다.
 
 # thecampy - 더캠프 파이썬 라이브러리
 
@@ -14,9 +14,14 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
 ## Getting Started
 
-### Dependency
+### Before you start
+
+* **내부 시스템의 변화로, v4.0.0a부터 훈련병 카페 가입을 실행 전 수동으로 미리 해주셔야합니다.**
+
+### Dependencies
 
 * requests
+* bs4
 
 ### Installing
 
@@ -27,27 +32,12 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 ```
 import thecampy
 
-my_soldier = thecampy.Soldier(
-
-        '이름',
-
-        '생일(yyyymmdd)',
-
-        '입대일(yyyymmdd)',
-
-        '부대명(ex: 육군훈련소)'
-
-)
-
-msg = thecampy.Message([제목], [내용(1500자 이하)])
-
-image = thecampy.ThecampyImage('sample.png')
+my_soldier = thecampy.Soldier('이름')
+msg = thecampy.Message('test', 'test')
 
 tc = thecampy.Client(email, pw)
-
-tc.get_soldier(my_soldier) #returns soldier code
-
-tc.send_message(my_soldier, msg, image)
+tc.get_soldier(my_soldier) # returns soldier_code
+tc.send_message(my_soldier, msg)
 ```
 
 ## Disclaimer
@@ -68,8 +58,12 @@ thecampy는 더캠프의 서비스업자와 관련이 없습니다. thecampy는 
 
 ## Version History
 
+- 4.0.0a
+    - **더 캠프 시스템 상 변화에 따른 작동방법 수정**
+        - 개발 초기단계로, 버그 리포트 부탁드립니다.
+
 - 3.0.2
-    - - `__init__`함수가 None이 아닌 값을 가지던 버그 수정 #10 (by [leesangwon](https://github.com/leeesangwon))
+    - `__init__`함수가 None이 아닌 값을 가지던 버그 수정 #10 (by [leesangwon](https://github.com/leeesangwon))
 
 - 3.0.1
     - 55사단(용인) 부대코드 추가 (이메일 제안)

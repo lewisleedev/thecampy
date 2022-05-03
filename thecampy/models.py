@@ -7,7 +7,7 @@ Soldier class를 initialize 할때의 unit parameter는 아래의 dictionary의 
 """
 
 unit_codes = {
-    '1사단' : '20121290100',
+    '1사단' : ('20121290100',),
     '2사단' : '20121490100',
     '3사단' : '20121590100',
     '5사단' : '20121690200',
@@ -36,14 +36,14 @@ unit_codes = {
     '51사단' : '20121190200',
     '53사단' : '20220280700',
     '55사단' : '20120180200',
-    '육군훈련소' : '20020191700',
-    '육군훈련소(23연대)' : '20020191800', # 육군훈련소 연대별 구분은 사라진 것 같습니다.
-    '육군훈련소(25연대)' : '20020191900',
-    '육군훈련소(26연대)' : '20020192000',
-    '육군훈련소(27연대)' : '20020192100',
-    '육군훈련소(28연대)' : '20020192200',
-    '육군훈련소(29연대)' : '20020192300',
-    '육군훈련소(30연대)' : '20020192400',
+    '육군훈련소' : '20020191700'
+    # '육군훈련소(23연대)' : '20020191800', # 육군훈련소 연대별 구분은 사라진 것 같습니다.
+    # '육군훈련소(25연대)' : '20020191900',
+    # '육군훈련소(26연대)' : '20020192000',
+    # '육군훈련소(27연대)' : '20020192100',
+    # '육군훈련소(28연대)' : '20020192200',
+    # '육군훈련소(29연대)' : '20020192300',
+    # '육군훈련소(30연대)' : '20020192400',
 }
 
 class Cookie:
@@ -71,7 +71,6 @@ class Cookie:
     def token(self):
         return self.token
 
-
 class Soldier:
     """훈련병의 정보를 저장하는 모델입니다.
     """
@@ -87,22 +86,59 @@ class Soldier:
         :param unit: 훈련병의 입대부대명(unit_codes 참고)
         :type unit: str
         """
-        if unit not in unit_codes:
-            raise exceptions.ThecampyValueError('해당 사단/육군훈련소 연대가 존재하지 않습니다.')
-
-        unit_code = unit_codes[unit]
 
         self.name = name
-        self.bday = bday
-        self.enlist_date = enlist_date
-        self.identity = "예비군인/훈련병"
-        self.identity_code = '0000490001'
-        self.army = '0000010001' #육군 코드
-        self.unit = unit
-        self.unit_code = unit_code
 
     def add_soldier_code(self, code):
         self.soldier_code = code
+
+# class Soldier:
+#     """훈련병의 정보를 저장하는 모델입니다.
+#     """
+#     def __init__(self, name, bday, enlist_date, unit):
+#         """Soldier 모델을 만듭니다.
+
+#         :param name: 훈련병의 이름
+#         :type name: str
+#         :param bday: 훈련병의 생년월일 ex) 19990812
+#         :type bday: int
+#         :param enlist_date: 훈련병의 입대일 ex)20200818
+#         :type enlist_date: int
+#         :param unit: 훈련병의 입대부대명(unit_codes 참고)
+#         :type unit: str
+#         """
+#         if unit not in unit_codes:
+#             raise exceptions.ThecampyValueError('해당 사단/육군훈련소 연대가 존재하지 않습니다.')
+
+#         unit_code = unit_codes[unit]
+
+#         if len(bday) == 8:
+#             formatted_bday = "{}-{}-{}".format(bday[:4],bday[4:6],bday[6:])
+#         else:
+#             formatted_bday = bday
+
+#         if len(enlist_date) == 8:
+#             formatted_eday = "{}-{}-{}".format(enlist_date[:4],enlist_date[4:6],enlist_date[6:])
+#         else:
+#             formatted_eday = enlist_date
+
+#         if unit == "육군훈련소":
+#             self.train_unit_type = '000140001'
+#         else:
+#             self.train_unit_type = '000140002'
+
+#         self.name = name
+#         self.bday = formatted_bday
+#         self.enlist_date = formatted_eday
+#         self.identity = "예비군인/훈련병"
+#         self.identity_code = '0000490001'
+#         self.army = '0000010001' #육군 코드
+#         self.unit = unit
+#         self.unit_code = unit_code
+#         self.soldier_code = None
+
+#     def add_soldier_code(self, code):
+#         self.soldier_code = code
 
 class Message:
     """훈련병에게 보낼 편지의 모델입니다.

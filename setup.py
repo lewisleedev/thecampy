@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="thecampy", # Replace with your own username
-    version="3.0.2",
+    version="4.0.0a1",
     author="lewisleedev",
     author_email="lewislee@lewislee.net",
     description="더 캠프 인터넷편지 비공식 라이브러리",
@@ -19,7 +19,8 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "requests"
+        "requests",
+        "bs4"
     ],
     python_requires='>=3.6',
 )

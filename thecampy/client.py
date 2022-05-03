@@ -1,6 +1,9 @@
 from typing import Optional
-import requests
+import requests, re
+
 from . import exceptions, images, models, utils
+from bs4 import BeautifulSoup
+
 
 class Client:
     """Client class는 thecampy의 메인 class입니다. 
@@ -43,45 +46,51 @@ class Client:
 
         if (self.cookie.iuid == False or self.cookie.token == False):
             raise exceptions.ThecampyException('알 수 없는 에러 {}'.format(r.json()))
+
+        print(self.cookie.iuid)
         
     def _enforce_login(self):
         if not hasattr(self, 'cookie'):
             raise exceptions.ThecampyValueError("로그인이 필요합니다.")
 
-    def add_soldier(self, soldier):
-        """The camp의 보고싶은 군인에 주어진 훈련병을 추가합니다.
+    # def add_soldier(self, soldier):
+    #     """The camp의 보고싶은 군인에 주어진 훈련병을 추가합니다.
 
-        :param soldier: 훈련병의 Soldier model
-        :type soldier: models.Soldier
-        """
-        self._enforce_login()
-        form = {
-            "missSoldierClassCdNm": soldier.identity, #성분 반환 (예비군인/훈련병)
-            "grpCdNm": '육군',
-            "missSoldierClassCd": soldier.identity_code,
-            "grpCd": '0000010001',#육군
-            "name": soldier.name,
-            "birth" : soldier.bday,
-            "enterDate" : soldier.enlist_date,
-        }
+    #     :param soldier: 훈련병의 Soldier model
+    #     :type soldier: models.Soldier
+    #     """
+    #     self._enforce_login()
+    #     form = {
+    #         "iuid":self.cookie.iuid,
+    #         "missSoldierClassCdNm": soldier.identity, #성분 반환 (예비군인/훈련병)
+    #         "grpCdNm": '육군',
+    #         "missSoldierClassCd": soldier.identity_code,
+    #         "grpCd": '0000010001',#육군
+    #         "name": soldier.name,
+    #         "birth" : soldier.bday,
+    #         "enterDate" : soldier.enlist_date,
+    #         "missSoldierRelationshipCd": '0000420006', # 친구, 지인 코드
+    #         "countryCode": '39|+82', # 필수는 아닌 것 같습니다.
+    #         "trainUnitCd": soldier.unit_code
+    #     }
 
-        r = requests.post(
-            url = utils.request_url('missSoldier/insertDirectMissSoldierA.do'),
-            json = True,
-            headers = {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Cookie' : "{}; {}".format(self.cookie.iuid, self.cookie.token)
-            },
-            data = form
-        )
-        
-        if (r.status_code != requests.codes.ok):
-            raise exceptions.ThecampyReqError('HTTP 에러: {}'.format(r.status_code))
+    #     r = requests.post(
+    #         url = utils.request_url('missSoldier/insertDirectMissSoldierA.do'),
+    #         json = True,
+    #         headers = {
+    #             'Content-Type': 'application/x-www-form-urlencoded',
+    #             'Cookie' : "{}; {}".format(self.cookie.iuid, self.cookie.token)
+    #         },
+    #         data = form
+    #     )
 
-        ok_resultCd = ['0000', 'E001']
+    #     if (r.status_code != requests.codes.ok):
+    #         raise exceptions.ThecampyReqError('HTTP 에러: {}'.format(r.status_code))
 
-        if (r.json()['resultCd'] not in ok_resultCd):
-            raise exceptions.ThecampyException("알 수 없는 에러: resultCd: {}".format((r.json()['resultCd'])))
+    #     ok_resultCd = ['0000', 'E001']
+
+    #     if (r.json()['resultCd'] not in ok_resultCd):
+    #         raise exceptions.ThecampyException("알 수 없는 에러: resultCd: {}".format((r.json()['resultCd'])))
 
     def get_soldier(self, soldier):
         """주어진 훈련병의 고유 id(code)를 class`models.Soldier`에 추가하고, code를 반환합니다.
@@ -92,16 +101,39 @@ class Client:
         :rtype: str
         """
         self._enforce_login()
-        form = {
-            "name" : soldier.name,
-            "birth" : soldier.bday,
-            "enterDate" : soldier.enlist_date,
-            "trainUnitCd": soldier.unit_code,
-            "grpCd": '0000010001'
-        }
+
+        r_cafecode = requests.post(
+            url = utils.request_url('eduUnitCafe/viewEduUnitCafeMain.do'),
+            json = True,
+            headers = {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cookie' : "{}; {}".format(self.cookie.iuid, self.cookie.token)
+            },
+        )
+        cafecode_soup = BeautifulSoup(r_cafecode.content, 'html.parser')
+
+        cafe_cards = cafecode_soup.find_all(class_="cafe-card-box")
+
+        seled = None
+
+        for card in cafe_cards:
+            if card.select('div:-soup-contains("{}")'.format(soldier.name)):
+                seled = card.findChild("a", "btn-green")['href']
         
-        r = requests.post(
-            url = utils.request_url('main/cafeCreateCheckA.do'),
+        if seled is None:
+            raise exceptions.ThecampyValueError("해당 군인 카페에 가입되어있지 않은 것 같습니다.")
+
+        pattern = "(?<=\().*?(?=\s*\)[^)]*$)"
+
+        cafe_code = re.findall(pattern, seled)[0].split(',')[0].replace("'","")
+
+        form = {
+            'trainUnitCd' : soldier.unit_code,
+            'trainUnitEduSeq': cafe_code
+        }
+
+        r_letter = requests.post(
+            url = utils.request_url('consolLetter/viewConsolLetterMain.do'),
             json = True,
             headers = {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -109,24 +141,23 @@ class Client:
             },
             data = form
         )
-        
-        if (r.status_code != requests.codes.ok):
-            raise exceptions.ThecampyReqError('HTTP 에러: {}'.format(r.status_code))
-        
-        if not r.json():
-            raise exceptions.ThecampyReqError('응답값이 없습니다.')
-        
-        if r.status_code == 200 and r.json()["resultCd"] != '9999':
-            raise exceptions.ThecampyException('알 수 없는 오류: {}'.format(r.json()))
 
-        if len(r.json()['listResult']) == 0:
-             raise exceptions.ThecampyValueError("해당하는 훈련병을 찾을 수 없습니다.")
+        letter_soup = BeautifulSoup(r_letter.content, 'html.parser')
 
-        self.soldier_code = r.json()['listResult'][0]['traineeMgrSeq']
+        slide_cards = letter_soup.find_all(class_="swiper-slide")
+
+        for card in slide_cards:
+            if card.select('div:-soup-contains("{}")'.format(soldier.name)):
+                the_letter_card = card.findChild("a", "letter-card-box")['href']
         
-        soldier.add_soldier_code(self.soldier_code)
+        if not the_letter_card:
+            raise exceptions.ThecampyException("알 수 없는 오류")
+        
+        soldier_code = re.findall(pattern, the_letter_card)[0].split(',')[0].replace("'","")
 
-        return self.soldier_code
+        soldier.add_soldier_code(soldier_code)
+        
+        return soldier_code
 
     def send_message(self, soldier: models.Soldier, message: models.Message,
                      image: Optional[images.ThecampyImage] = None):
@@ -140,10 +171,7 @@ class Client:
         :type image: Optional[images.ThecampyImage], optional
         """
         self._enforce_login()
-        if soldier.identity != '예비군인/훈련병':
-            message.is_sent = False
-            raise exceptions.ThecampyValueError('예비군인/훈련병에게만 편지를 보낼 수 있습니다.')
-
+        
         if not soldier.soldier_code:
             message.is_sent = False
             raise exceptions.ThecampyValueError('훈련병 식별코드를 받지 못하였습니다.')
