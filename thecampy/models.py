@@ -74,7 +74,7 @@ class Cookie:
 class Soldier:
     """훈련병의 정보를 저장하는 모델입니다.
     """
-    def __init__(self, name, bday, enlist_date, unit):
+    def __init__(self, name):
         """Soldier 모델을 만듭니다.
 
         :param name: 훈련병의 이름
