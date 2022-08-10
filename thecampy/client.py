@@ -126,6 +126,9 @@ class Client:
         pattern = "(?<=\().*?(?=\s*\)[^)]*$)"
 
         cafe_code = re.findall(pattern, seled)[0].split(',')[0].replace("'","")
+        unit_code = re.findall(pattern, seled)[0].split(',')[1].replace("'","")
+
+        soldier.unit_code = unit_code
 
         form = {
             'trainUnitCd' : soldier.unit_code,
