@@ -25,7 +25,7 @@ thecampy는 [parksb/the-camp-lib](https://github.com/parksb/the-camp-lib)을 참
 
 ### Installing
 
-* `pip install thecampy`
+* `pip install thecampy==4.0.0a2`
 
 ### Quickstart
 
