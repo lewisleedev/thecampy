@@ -1,5 +1,7 @@
 ![PyPI](https://img.shields.io/pypi/v/thecampy?style=for-the-badge)![GitHub](https://img.shields.io/github/license/lewisleedev/thecampy?style=for-the-badge)![GitHub Workflow Status](https://img.shields.io/github/workflow/status/lewisleedev/thecampy/%EB%8D%94%EC%BA%A0%ED%94%84%20response%20%ED%99%95%EC%9D%B8?label=Response&style=for-the-badge)
 
+> :warning: 2023년부로 더 이상 Maintain하지 않도록 결정했습니다. 부족하지만 그동안 사용해주셔서 감사합니다.
+
 > :warning: 현재 더캠프 내부 시스템의 변화로 기존 v3.0.2는 작동하지 않습니다. 4.0.0a 버젼은 beautifulsoup을 사용해 soldier_code를 받아옵니다. 카페 가입을 수동으로 해주어야합니다.
 
 # thecampy - 더캠프 파이썬 라이브러리
